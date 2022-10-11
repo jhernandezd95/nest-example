@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Item } from 'src/item/entities/item.entity';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({ name: 'stores' })
 export class Store {
@@ -40,4 +41,7 @@ export class Store {
     example: 'Calle 23 # 12 entre 41 y 43',
   })
   address?: string;
+
+  @OneToMany(() => Item, (item) => item.Store, { cascade: true })
+  Items?: Item[];
 }

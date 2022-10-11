@@ -70,4 +70,13 @@ export class CreateItemDto {
     example: ['mesa', 'madera'],
   })
   tags: string[];
+
+  @IsInt()
+  @IsPositive()
+  @ApiProperty({
+    description: 'Store ID',
+    required: true,
+    example: 1,
+  })
+  storeId: number;
 }

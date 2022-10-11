@@ -1,9 +1,11 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { Store } from 'src/store/entities/store.entity';
 import {
   BeforeInsert,
   BeforeUpdate,
   Column,
   Entity,
+  ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
@@ -77,6 +79,9 @@ export class Item {
     example: ['mesa', 'madera'],
   })
   tags: string[];
+
+  @ManyToOne(() => Store, (store) => store.Items)
+  Store: Store;
 
   @BeforeInsert()
   checkSlugInsert() {
