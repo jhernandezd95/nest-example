@@ -5,7 +5,7 @@ import { JoiValidationSchema } from './config/joi.validations';
 
 import { ItemModule } from './item/item.module';
 import { StoreModule } from './store/store.module';
-import { SeedModule } from './seed/seed.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -28,7 +28,7 @@ import { SeedModule } from './seed/seed.module';
     }),
     ItemModule,
     StoreModule,
-    SeedModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [],
