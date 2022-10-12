@@ -88,5 +88,5 @@ export class User {
     enum: Role,
     example: Role.OWNER,
   })
-  role: string[];
+  roles: string[];
 }

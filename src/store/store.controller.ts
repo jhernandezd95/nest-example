@@ -16,6 +16,8 @@ import { Store } from './entities/store.entity';
 import { CreateStoreDto } from './dto/create-store.dto';
 import { UpdateStoreDto } from './dto/update-store.dto';
 import { FindAllDto } from 'src/store/dto/find-all.dto';
+import { Auth } from 'src/auth/decorators';
+import { ValidRoles } from 'src/auth/interfaces';
 
 @ApiTags('Store')
 @Controller('store')
@@ -23,6 +25,7 @@ export class StoreController {
   constructor(private readonly storeService: StoreService) {}
 
   @Post()
+  @Auth(ValidRoles.OWNER)
   @ApiResponse({
     status: 201,
     description: 'Created sucessfully',
@@ -35,6 +38,7 @@ export class StoreController {
   }
 
   @Get()
+  @Auth(ValidRoles.ADMIN)
   @ApiQuery({})
   @ApiResponse({
     status: 201,
@@ -47,6 +51,7 @@ export class StoreController {
   }
 
   @Get(':id')
+  @Auth(ValidRoles.OWNER)
   @ApiResponse({
     status: 201,
     description: 'Returned sucessfully',
@@ -58,6 +63,7 @@ export class StoreController {
   }
 
   @Patch(':id')
+  @Auth(ValidRoles.OWNER)
   @ApiResponse({
     status: 201,
     description: 'Updated sucessfully',
@@ -72,6 +78,7 @@ export class StoreController {
   }
 
   @Delete(':id')
+  @Auth(ValidRoles.OWNER)
   @ApiResponse({
     status: 201,
     description: 'Removed sucessfully',

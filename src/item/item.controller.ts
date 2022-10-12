@@ -16,6 +16,8 @@ import { CreateItemDto } from './dto/create-item.dto';
 import { UpdateItemDto } from './dto/update-item.dto';
 import { FindAllDto } from './dto/find-all.dto';
 import { Item } from './entities/';
+import { ValidRoles } from 'src/auth/interfaces';
+import { Auth } from 'src/auth/decorators';
 
 @ApiTags('Item')
 @Controller('item')
@@ -23,6 +25,7 @@ export class ItemController {
   constructor(private readonly itemService: ItemService) {}
 
   @Post()
+  @Auth(ValidRoles.OWNER)
   @ApiResponse({
     status: 201,
     description: 'Created sucessfully',
@@ -58,6 +61,7 @@ export class ItemController {
   }
 
   @Patch(':id')
+  @Auth(ValidRoles.OWNER)
   @ApiResponse({
     status: 201,
     description: 'Updated sucessfully',
@@ -72,6 +76,7 @@ export class ItemController {
   }
 
   @Delete(':id')
+  @Auth(ValidRoles.OWNER)
   @ApiResponse({
     status: 201,
     description: 'Removed sucessfully',
