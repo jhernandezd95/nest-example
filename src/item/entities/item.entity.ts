@@ -6,8 +6,10 @@ import {
   Column,
   Entity,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { Image } from './image.entity';
 
 @Entity({ name: 'items' })
 export class Item {
@@ -82,6 +84,9 @@ export class Item {
 
   @ManyToOne(() => Store, (store) => store.Items)
   Store: Store;
+
+  @OneToMany(() => Image, (image) => image.Item, { cascade: true, eager: true })
+  Images?: Image[];
 
   @BeforeInsert()
   checkSlugInsert() {

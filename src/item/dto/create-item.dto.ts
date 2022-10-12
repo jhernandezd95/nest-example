@@ -79,4 +79,17 @@ export class CreateItemDto {
     example: 1,
   })
   storeId: number;
+
+  @IsArray()
+  @IsString({
+    each: true,
+  })
+  @IsOptional()
+  @ApiProperty({
+    description: 'Images',
+    required: true,
+    isArray: true,
+    example: ['mesa', 'madera'],
+  })
+  Images?: string[];
 }

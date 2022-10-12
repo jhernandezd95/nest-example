@@ -42,6 +42,6 @@ export class Store {
   })
   address?: string;
 
-  @OneToMany(() => Item, (item) => item.Store, { cascade: true })
+  @OneToMany(() => Item, (item) => item.Store, { cascade: true, eager: true })
   Items?: Item[];
 }

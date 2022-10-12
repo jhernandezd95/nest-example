@@ -5,6 +5,7 @@ import { JoiValidationSchema } from './config/joi.validations';
 
 import { ItemModule } from './item/item.module';
 import { StoreModule } from './store/store.module';
+import { SeedModule } from './seed/seed.module';
 
 @Module({
   imports: [
@@ -19,7 +20,7 @@ import { StoreModule } from './store/store.module';
       username: process.env.DB_POSTGRES_USERNAME,
       password: process.env.DB_POSTGRES_PASS,
       autoLoadEntities: true,
-      synchronize: false,
+      synchronize: true,
       migrationsRun: true,
       logging: true,
       logger: 'file',
@@ -27,6 +28,7 @@ import { StoreModule } from './store/store.module';
     }),
     ItemModule,
     StoreModule,
+    SeedModule,
   ],
   controllers: [],
   providers: [],
