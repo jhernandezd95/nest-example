@@ -1,5 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 enum Role {
   ADMIN = 'admin',
@@ -60,7 +67,7 @@ export class User {
   })
   birthday: Date;
 
-  @Column('boolean')
+  @Column('boolean', { default: false })
   @ApiProperty({
     description: 'If the user is active',
     required: true,
@@ -69,13 +76,54 @@ export class User {
   })
   isActive: boolean;
 
-  @Column('date')
+  @Column('boolean', { default: false })
+  @ApiProperty({
+    description: 'If the user was baned by the admin',
+    required: true,
+    example: true,
+    default: false,
+  })
+  isAccountNonLocked: boolean;
+
+  @Column('boolean', { default: false })
+  @ApiProperty({
+    description: 'If the account was expired',
+    required: true,
+    example: true,
+    default: false,
+  })
+  isAccountNonExpired: boolean;
+
+  @Column('text', {
+    unique: true,
+    select: false,
+  })
+  @ApiProperty({
+    description: 'Pin used for active account.',
+    required: false,
+    example: '12345s',
+  })
+  pin: string;
+
+  @Column({
+    type: 'date',
+    nullable: true,
+  })
   @ApiProperty({
     description: 'Last login date',
     required: false,
     example: '2022-11-02',
   })
   lastLogin: Date;
+
+  @CreateDateColumn()
+  createdAt: Date; // Creation date
+
+  @UpdateDateColumn()
+  updatedAt: Date; // Last updated date
+
+  @DeleteDateColumn()
+  deletedAt: Date; // Deletion date
 
   @Column({
     type: 'enum',

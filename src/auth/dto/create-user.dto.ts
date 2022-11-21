@@ -1,11 +1,11 @@
 import { ApiProperty } from '@nestjs/swagger';
 import {
-  IsDate,
   IsEmail,
   IsString,
   MinLength,
   MaxLength,
   Matches,
+  IsDateString,
 } from 'class-validator';
 
 export class CreateUserDto {
@@ -49,7 +49,7 @@ export class CreateUserDto {
   })
   lastName?: string;
 
-  @IsDate()
+  @IsDateString()
   @ApiProperty({
     description: 'User birthday',
     required: true,

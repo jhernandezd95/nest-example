@@ -1,15 +1,6 @@
 version: "3"
 
 services:
-  database:
-    image: mongo
-    container_name: mongo_test
-    ports:
-      - 27018:27018
-    environment:
-      MONGODB_DATABASE: ${DB_MONGODB_URI}
-    volumes:
-      - ./postgres:/var/lib/postgresql/data
   db:
     image: postgres:14.3
     restart: always
@@ -18,7 +9,7 @@ services:
     environment:
       POSTGRES_PASSWORD: ${DB_POSTGRES_PASS}
       POSTGRES_DB: ${DB_POSTGRES_NAME}
-    container_name: teslodb
+    container_name: postgresNest
     volumes:
       - ./postgres:/var/lib/postgresql/data
 
